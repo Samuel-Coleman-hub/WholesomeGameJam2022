@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:WholesomeGameJam2022/Assets/Sprites.meta
 guid: e82fd98ec3dd7b944908f45b4e9a6b25
+=======
+guid: f261729c15cb58e4d95c3982a3e7d512
+>>>>>>> Sam-Saved:WholesomeGameJam2022/Library/PackageCache/com.unity.2d.animation@5.1.1/Samples~/AnimationSamples/1 Simple/Sprites.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
