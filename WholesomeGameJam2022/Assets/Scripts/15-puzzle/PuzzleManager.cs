@@ -4,26 +4,85 @@ using UnityEngine;
 
 public class PuzzleManager : MonoBehaviour
 {
+    public static PuzzleManager instance;
 
+    public List<Vector3> rightSequencePositions;
+    private int nbBox = 16;
+    private List<int> initSequence;
+    [SerializeField] GameObject boxes;
 
-    private List<GameObject> rightSequence;
-    private int nbBox = 15;
+    private List<int> initTestSequence;
+
+    public PuzzleManager()
+    {
+        instance = this;
+    }
 
     void initGame()
     {
-        rightSequence = new List<GameObject>();
-        for(int i = 0; i < 15; i++)
+        rightSequencePositions = new List<Vector3>();
+        initSequence = new List<int>();
+        rightSequencePositions = new List<Vector3>();
+
+        for(int i = 0; i < nbBox; i++)
         {
-            rightSequence.Add(gameObject.transform.Find("boxes").GetChild(i).gameObject);
+            rightSequencePositions.Add(boxes.transform.GetChild(i).position);
+            int rand = Random.Range(0, nbBox);
+            while (initSequence.Contains(rand))
+            {
+                rand = Random.Range(0, nbBox);
+            }
+            initSequence.Add(rand);
+        }
+        shuffle();
+    }
+
+    public void shuffle()
+    {
+        initTestSequence = new List<int>()
+        {
+            0,1,2,3,4,5,6,7,8,9,10,11,12,13,15,14
+        };
+
+
+        for(int i = 0; i < nbBox; i++)
+        {
+            boxes.transform.GetChild(i).position = rightSequencePositions[initTestSequence[i]];
         }
     }
 
+    public void endGameIfSolved(GameObject emptyBox)
+    {
+        if (isSolved(emptyBox))
+        {
+            Debug.Log("done");
+            MoveManager.instance.gameObject.SetActive(false);
+        }
+    }
 
+    public bool isSolved(GameObject emptyBox)
+    {
+        if(emptyBox.transform.position != rightSequencePositions[nbBox - 1])
+        {
+            return false;
+        }
+
+        
+        for (int i = 0; i < nbBox; i++)
+        {
+            if (boxes.transform.GetChild(i).position != rightSequencePositions[i])
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        initGame();   
     }
 
     // Update is called once per frame

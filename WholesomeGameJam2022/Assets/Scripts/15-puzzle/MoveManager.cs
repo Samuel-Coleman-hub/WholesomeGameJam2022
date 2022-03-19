@@ -20,6 +20,8 @@ public class MoveManager : MonoBehaviour
             entity.transform.position = Vector2.MoveTowards(entity.transform.position, targetPosition, entity.moveSpeed * Time.deltaTime);
             yield return null;
         }
+        PuzzleManager.instance.endGameIfSolved(emptyBox);
+
     }
 
     public bool canMove(BoxController box)
