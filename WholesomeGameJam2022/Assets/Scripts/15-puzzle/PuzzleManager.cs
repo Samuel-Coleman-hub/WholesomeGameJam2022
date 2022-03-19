@@ -47,7 +47,7 @@ public class PuzzleManager : MonoBehaviour
 
         for(int i = 0; i < nbBox; i++)
         {
-            boxes.transform.GetChild(i).position = rightSequencePositions[initTestSequence[i]];
+            boxes.transform.GetChild(i).position = rightSequencePositions[initSequence[i]];
         }
     }
 
@@ -55,8 +55,9 @@ public class PuzzleManager : MonoBehaviour
     {
         if (isSolved(emptyBox))
         {
+            //temporary
             Debug.Log("done");
-            MoveManager.instance.gameObject.SetActive(false);
+            GameObject.Find("15-puzzle").SetActive(false);
         }
     }
 
