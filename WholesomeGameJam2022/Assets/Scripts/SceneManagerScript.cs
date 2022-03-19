@@ -9,16 +9,25 @@ public class SceneManagerScript : MonoBehaviour
     
     public void GoToBaseCamp()
     {
-        SceneManager.LoadScene("BaseCamp");
+        if(SceneManager.GetActiveScene().name != "BaseCamp")
+        {
+            SceneManager.LoadScene("BaseCamp");
+        }
     }
 
     public void GotToIslandOne()
     {
-        SceneManager.LoadScene("Island 1");
+        if (SceneManager.GetActiveScene().name != "Island 1")
+        {
+            SceneManager.LoadScene("Island 1");
+        }
     }
 
     public void GoToIslandTwo()
     {
-        SceneManager.LoadScene("Island 2");
+        if (SceneManager.GetActiveScene().name != "Island 2")
+        {
+            SceneManager.LoadScene("Island 2");
+        }
     }
 }

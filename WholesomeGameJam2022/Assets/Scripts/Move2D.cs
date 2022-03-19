@@ -7,12 +7,6 @@ public class Move2D : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
     public bool isGrounded = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
