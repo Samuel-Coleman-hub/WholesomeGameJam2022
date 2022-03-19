@@ -61,6 +61,11 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\15-puzzle\BoxController.cs" />
     <Compile Include="Assets\Scripts\15-puzzle\MoveManager.cs" />
+    <Compile Include="Assets\Scripts\TicTacToe\BoxTicTacToe.cs" />
+    <Compile Include="Assets\Scripts\TicTacToe\TimeManager.cs" />
+    <Compile Include="Assets\Scripts\TicTacToe\BasicAi.cs" />
+    <Compile Include="Assets\Scripts\TicTacToe\AIStrategy.cs" />
+    <Compile Include="Assets\Scripts\TicTacToe\BoardManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
