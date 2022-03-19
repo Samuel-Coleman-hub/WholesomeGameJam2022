@@ -11,4 +11,14 @@ public class SceneManagerScript : MonoBehaviour
     {
         SceneManager.LoadScene("BaseCamp");
     }
+
+    public void GotToIslandOne()
+    {
+        SceneManager.LoadScene("Island 1");
+    }
+
+    public void GoToIslandTwo()
+    {
+        SceneManager.LoadScene("Island 2");
+    }
 }
