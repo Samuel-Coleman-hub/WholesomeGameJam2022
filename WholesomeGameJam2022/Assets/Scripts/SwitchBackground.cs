@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SwitchBackground : MonoBehaviour
 {
-    [SerializeField] float timeToWait = 1f;
+    [SerializeField] float timeToWait = 0.5f;
     [SerializeField] Sprite secondaryBackground;
     private Sprite background;
     // Start is called before the first frame update

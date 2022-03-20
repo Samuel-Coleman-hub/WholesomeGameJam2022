@@ -6,6 +6,7 @@ public class Move2D : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5f;
     public bool isGrounded = false;
+    public string directionMoving = "Right";
 
     // Update is called once per frame
     void Update()
@@ -13,6 +14,16 @@ public class Move2D : MonoBehaviour
         Jump();
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
         transform.position += movement * Time.deltaTime * moveSpeed;
+
+        if(movement.x > 0f)
+        {
+            directionMoving = "Right";
+        }
+        else if(movement.x < 0f)
+        {
+            directionMoving = "Left";
+        }
+
     }
 
     private void Jump()
