@@ -5,8 +5,18 @@ using UnityEngine;
 public class Move2D : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5f;
+
     public bool isGrounded = false;
     public string directionMoving = "Right";
+
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -18,12 +28,19 @@ public class Move2D : MonoBehaviour
         if(movement.x > 0f)
         {
             directionMoving = "Right";
+            animator.SetBool("isWalking", true);
+            spriteRenderer.flipX = false;
         }
         else if(movement.x < 0f)
         {
             directionMoving = "Left";
+            animator.SetBool("isWalking", true);
+            spriteRenderer.flipX = true;
         }
-
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
     }
 
     private void Jump()
