@@ -26,17 +26,27 @@ public class MoveManager : MonoBehaviour
 
     public bool canMove(BoxController box)
     {
+        Debug.Log("box.transform.position: " + (box.transform.position));
+        Debug.Log("emptyBox.transform.position.x: " + (emptyBox.transform.position));
+
+
+        Debug.Log("box.transform.position.x - emptyBox.transform.position.x: " + (box.transform.position.x - emptyBox.transform.position.x));
         if (Mathf.Abs(box.transform.position.x - emptyBox.transform.position.x) <= 0.1f)
         {
-            if (Mathf.Abs(box.transform.position.y - emptyBox.transform.position.y) <= 0.8)
+            Debug.Log("box.transform.position.y - emptyBox.transform.position.y: " + (box.transform.position.y - emptyBox.transform.position.y));
+            if (Mathf.Abs(box.transform.position.y - emptyBox.transform.position.y) <= 1.5)
             {
                 return true;
             }
         }
 
+        Debug.Log("box.transform.position.y - emptyBox.transform.position.y: " + (box.transform.position.y - emptyBox.transform.position.y));
+
         if (Mathf.Abs(box.transform.position.y - emptyBox.transform.position.y) <= 0.1f)
         {
-            if (Mathf.Abs(box.transform.position.x - emptyBox.transform.position.x) <= 1.5)
+            Debug.Log("box.transform.position.x - emptyBox.transform.position.x: " + (box.transform.position.x - emptyBox.transform.position.x));
+
+            if (Mathf.Abs(box.transform.position.x - emptyBox.transform.position.x) <= 2.7)
             {
                 return true;
             }
