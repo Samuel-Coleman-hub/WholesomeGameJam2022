@@ -5,6 +5,7 @@ using UnityEngine;
 public class PuzzleManager : MonoBehaviour
 {
     public static PuzzleManager instance;
+    [SerializeField] DialogManager dialogManager;
 
     public List<Vector3> rightSequencePositions;
     private int nbBox = 16;
@@ -47,7 +48,7 @@ public class PuzzleManager : MonoBehaviour
 
         for(int i = 0; i < nbBox; i++)
         {
-            boxes.transform.GetChild(i).position = rightSequencePositions[initSequence[i]];
+            boxes.transform.GetChild(i).position = rightSequencePositions[initTestSequence[i]];
         }
     }
 
@@ -57,7 +58,9 @@ public class PuzzleManager : MonoBehaviour
         {
             //temporary
             Debug.Log("done");
-            GameObject.Find("15-puzzle").SetActive(false);
+            
+            dialogManager.isPlaying = false;
+            dialogManager.showNewDialog();
         }
     }
 

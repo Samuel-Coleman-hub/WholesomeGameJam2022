@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\Grounded.cs" />
     <Compile Include="Assets\Scripts\PlayerRaycast.cs" />
     <Compile Include="Assets\Scripts\GameBox\ExitGameBox.cs" />
+    <Compile Include="Assets\Scripts\Dialogues\DialogManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
