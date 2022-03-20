@@ -11,6 +11,8 @@ public class FishBehaviour : MonoBehaviour
     private Coroutine moveForward;
     private Coroutine moveBackward;
 
+    [SerializeField] LayerMask rodLayer;
+
     public void getCaught()
     {
         StopCoroutine(moveForward);
@@ -26,20 +28,24 @@ public class FishBehaviour : MonoBehaviour
     IEnumerator Start()
     {
      
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.left,100, rodLayer.value);
         if (hit.collider != null)
         {
 
             pointB = hit.collider.gameObject.transform.position;
+            Debug.Log(pointB);
+            Debug.Log(hit.collider.gameObject.name);
             pointB.y = transform.position.y;
+            
 
         }
         var pointA = transform.position;
         while (true)
         {
+            
             moveForward = StartCoroutine(MoveObject(transform, pointA, pointB, 3.0f, Random.Range(normalSpeed, maxSpeed)));
             yield return moveForward;
-            pointA = pointB - new Vector3(Random.Range(1.0f, 1.4f), 0, 0);
+            pointA = pointB + new Vector3(Random.Range(1.0f, 1.4f), 0, 0);
             moveBackward = StartCoroutine(MoveObject(transform, pointB, pointA, 3.0f, Random.Range(minSpeed, normalSpeed)));
             yield return moveBackward;
         }
