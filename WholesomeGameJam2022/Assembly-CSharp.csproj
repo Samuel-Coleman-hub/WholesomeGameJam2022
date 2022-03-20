@@ -755,14 +755,6 @@
       <Project>{5163A901-C7DE-64A4-D377-351093BA8B19}</Project>
       <Name>Unity.2D.IK.Runtime</Name>
     </ProjectReference>
-    <ProjectReference Include="Cinemachine.csproj">
-      <Project>{4FB887D6-E552-1EFF-0321-B322A9A87706}</Project>
-      <Name>Cinemachine</Name>
-    </ProjectReference>
-    <ProjectReference Include="com.unity.cinemachine.editor.csproj">
-      <Project>{4933EBEB-A4C7-D6B0-06AA-0222FEEF7ACC}</Project>
-      <Name>com.unity.cinemachine.editor</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.2D.Animation.Triangle.Runtime.csproj">
       <Project>{3A14176E-96BA-0C0D-AED4-2A078C3CD6EF}</Project>
       <Name>Unity.2D.Animation.Triangle.Runtime</Name>
@@ -806,6 +798,14 @@
     <ProjectReference Include="Unity.SysrootPackage.Editor.csproj">
       <Project>{BB2E0990-A3D8-608D-785B-33566F7BEAE1}</Project>
       <Name>Unity.SysrootPackage.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="com.unity.cinemachine.editor.csproj">
+      <Project>{4933EBEB-A4C7-D6B0-06AA-0222FEEF7ACC}</Project>
+      <Name>com.unity.cinemachine.editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Cinemachine.csproj">
+      <Project>{4FB887D6-E552-1EFF-0321-B322A9A87706}</Project>
+      <Name>Cinemachine</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
