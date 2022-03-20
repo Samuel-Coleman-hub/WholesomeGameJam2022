@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BoardManager : MonoBehaviour
 {
-    public static BoardManager instance;
+    [SerializeField] public static BoardManager instance;
     public int state;
     [SerializeField] GameObject timeManager;
 
