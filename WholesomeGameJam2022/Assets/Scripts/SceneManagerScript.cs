@@ -11,7 +11,7 @@ public class SceneManagerScript : MonoBehaviour
     {
         if(SceneManager.GetActiveScene().name != "BaseCamp")
         {
-            SceneManager.LoadScene("BaseCamp");
+            SceneManager.LoadScene("BaseCampBackUp");
         }
     }
 
@@ -29,5 +29,21 @@ public class SceneManagerScript : MonoBehaviour
         {
             SceneManager.LoadScene("Island 2");
         }
+    }
+
+    public void GoToStartMenu()
+    {
+        Debug.Log("Go back");
+        SceneManager.LoadScene("Start Scene");
+    }
+
+    public void GoToCredits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

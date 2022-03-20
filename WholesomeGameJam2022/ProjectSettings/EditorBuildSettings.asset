@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Island 2.unity
     guid: ce1e4ecb52f69eb40a46a1cb3698adc8
+  - enabled: 1
+    path: Assets/Scenes/BaseCampBackUp.unity
+    guid: 2445196990b721e4a889a2b1d0de7563
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: 433588bcceaef2b44ae56836d6868216
   m_configObjects: {}
