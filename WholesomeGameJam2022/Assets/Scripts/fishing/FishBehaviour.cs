@@ -3,42 +3,61 @@ using UnityEngine;
 
 public class FishBehaviour : MonoBehaviour
 {
+    public Vector3 pointB;
+    public float maxSpeed = 12;
+    public float normalSpeed = 11;
+    public float minSpeed = 10;
 
-    [SerializeField] fishMoveManager fishMoveManager;
-    public float speed = 1;
-    GameObject target;
-    private IEnumerator coroutine;
-    public enum behaviour
+    private Coroutine moveForward;
+    private Coroutine moveBackward;
+
+    public void getCaught()
     {
-        easyToCatch,
-        normal,
-        hardToCatch
+        StopCoroutine(moveForward);
+        StopCoroutine(moveBackward);
+        StartCoroutine(MoveObject(transform, transform.position, pointB, 3.0f, maxSpeed));
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void escape()
     {
+
+    }
+
+    IEnumerator Start()
+    {
+     
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right);
-        if(hit.collider!= null)
+        if (hit.collider != null)
         {
 
-            target = hit.collider.gameObject;
-            coroutine = fishMoveManager.Move(target.transform.position,speed);            
-            StartCoroutine(coroutine);
+            pointB = hit.collider.gameObject.transform.position;
+            pointB.y = transform.position.y;
+
+        }
+        var pointA = transform.position;
+        while (true)
+        {
+            moveForward = StartCoroutine(MoveObject(transform, pointA, pointB, 3.0f, Random.Range(normalSpeed, maxSpeed)));
+            yield return moveForward;
+            pointA = pointB - new Vector3(Random.Range(1.0f, 1.4f), 0, 0);
+            moveBackward = StartCoroutine(MoveObject(transform, pointB, pointA, 3.0f, Random.Range(minSpeed, normalSpeed)));
+            yield return moveBackward;
+        }
+    }
+
+    IEnumerator MoveObject(Transform thisTransform, Vector3 startPos, Vector3 endPos, float time, float speed)
+    {
+        var i = 0.0f;
+        var rate = 1.0f / time;
+        while (i < 1.0f)
+        {
+            i += speed*Time.deltaTime * rate;
+            thisTransform.position = Vector3.Lerp(startPos, endPos, i);
+            yield return null;
         }
 
-
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        StopCoroutine(coroutine);
-        fishMoveManager.Move(target.transform.position - new Vector3(1,0,0), speed);
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+  
 }
