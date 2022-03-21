@@ -5,13 +5,20 @@ using UnityEngine;
 public class DialogManager : MonoBehaviour
 {
     [SerializeField] GameObject Npc;
-    int currentDialog = 0;
+    public int currentDialog = 0;
     [SerializeField] GameObject game;
 
     [SerializeField] string nameNPC;
 
+    [SerializeField] GameObject[] toRestore;
+    [SerializeField] GameObject[] toHideWhenRestore;
+
+
+
     public bool isPlaying = false;
     public bool win = false;
+
+    public bool loop = false;
 
     // Start is called before the first frame update
     void Start()
@@ -35,9 +42,22 @@ public class DialogManager : MonoBehaviour
         dialog.gameObject.transform.Find("Buttons").Find("No").gameObject.SetActive(false);
     }
 
+    void restore()
+    {
+        for(int i = 0; i < toRestore.Length; i++)
+        {
+            toRestore[i].SetActive(true);
+        }
+
+        for (int i = 0; i < toHideWhenRestore.Length; i++)
+        {
+            toHideWhenRestore[i].SetActive(false);
+        }
+        currentDialog = 0;
+    }
+
     public void showNewDialog()
     {
-        currentDialog++;
         GameObject newDialog = Npc.transform.GetChild(currentDialog).gameObject;
         newDialog.SetActive(true);
         game.transform.parent.gameObject.SetActive(false);
@@ -111,7 +131,7 @@ public class DialogManager : MonoBehaviour
 
                     if (dialog.transform.Find("Ally"))
                     {
-                        GameValues.allies.Add(nameNPC);
+                        Debug.Log("NEEEWWW ALLY");
                         GameObject.Find("Player").GetComponent<AllyManager>().allies.Add(nameNPC);
                     }
 
@@ -122,6 +142,8 @@ public class DialogManager : MonoBehaviour
 
                     if (dialog.transform.Find("QuizzWon"))
                     {
+                        Debug.Log("QUIZZ WON");
+
                         GameObject.Find("Player").transform.Find("QuizzState").Find("QuizzWon").gameObject.SetActive(true);
                         GameObject.Find("Player").transform.Find("QuizzState").Find("QuizzLost").gameObject.SetActive(false);
                     }
@@ -173,9 +195,14 @@ public class DialogManager : MonoBehaviour
             }
         }  else
         {
+            
             gameObject.transform.parent.gameObject.SetActive(false);
             gameObject.SetActive(false);
-
+            Npc = gameObject.transform.parent.gameObject;
+            if (loop)
+            {
+                restore();
+            }
         }
 
     }

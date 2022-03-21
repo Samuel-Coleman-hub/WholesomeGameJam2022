@@ -60,12 +60,15 @@
     <Compile Include="Assets\Scripts\SceneManagerScript.cs" />
     <Compile Include="Assets\Scripts\GameBox\ExitGameBox.cs" />
     <Compile Include="Assets\Scripts\fishing\FishingController.cs" />
+    <Compile Include="Assets\Scripts\NPCManagers\WistonLauncherBaseCamp.cs" />
     <Compile Include="Assets\Scripts\SwitchBackground.cs" />
     <Compile Include="Assets\Scripts\15-puzzle\PuzzleManager.cs" />
     <Compile Include="Assets\Scripts\NPCManagers\MimiLauncher.cs" />
+    <Compile Include="Assets\Scripts\GameValues.cs" />
     <Compile Include="Assets\Scripts\TicTacToe\BoardManager.cs" />
     <Compile Include="Assets\Scripts\TicTacToe\AIStrategy.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\NPCManagers\AlbertLauncher.cs" />
     <Compile Include="Assets\Scripts\NPCManagers\WistonLauncher.cs" />
     <Compile Include="Assets\Scripts\15-puzzle\BoxController.cs" />
     <Compile Include="Assets\Scripts\PlayerRaycast.cs" />
@@ -82,8 +85,7 @@
     <Compile Include="Assets\Scripts\TicTacToe\TimeManager.cs" />
     <Compile Include="Assets\Scripts\15-puzzle\MoveManager.cs" />
     <Compile Include="Assets\Scripts\Grounded.cs" />
-    <Compile Include="Assets\Scripts\NPCManagers\AlbertLauncher.cs" />
-    <Compile Include="Assets\Scripts\GameValues.cs" />
+    <Compile Include="Assets\Scripts\AIDisplayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

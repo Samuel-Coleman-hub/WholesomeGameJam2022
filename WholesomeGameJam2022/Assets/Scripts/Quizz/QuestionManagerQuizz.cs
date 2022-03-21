@@ -8,11 +8,16 @@ public class QuestionManagerQuizz : MonoBehaviour
     public GameManager dialogResearcher;
 
     int currentQuestion = 1;
-    int nbQuestions = 5;
+    int nbQuestions = 4;
 
     List<int> performances;
 
     [SerializeField] GameObject questions;
+
+    public bool loop = false;
+    [SerializeField] GameObject [] toHideWhenReset;
+    [SerializeField] GameObject [] toShowWhenReset;
+
 
 
 
@@ -33,16 +38,14 @@ public class QuestionManagerQuizz : MonoBehaviour
         }
         currentQuestion++;
         //(button.transform.parent).parent.gameObject.SetActive(false);
-        StartCoroutine(transition((button.transform.parent).parent.gameObject));
+        transition((button.transform.parent).parent.gameObject);
     }
     
-    IEnumerator transition(GameObject go)
+    void transition(GameObject go)
     {
 
-        yield return new WaitForSeconds(0.2f);
         go.SetActive(false);
-        yield return new WaitForSeconds(0.2f);
-        if(currentQuestion <= 5)
+        if(currentQuestion <= 4)
         {
             questions.transform.GetChild(currentQuestion - 1).gameObject.SetActive(true);
         } else
@@ -52,14 +55,39 @@ public class QuestionManagerQuizz : MonoBehaviour
             {
                 Debug.Log("fail");
                 dialogManager.GetComponent<DialogManager>().advanceToFail();
+                if (loop)
+                {
+                    reset();
+
+                }
 
             }
             else
             {
                 dialogManager.GetComponent<DialogManager>().advanceToWin();
+                if (loop)
+                {
+                    reset();
+                }
                 Debug.Log("Success");
             }
         }
+    }
+
+    void reset()
+    {
+        for (int i = 0; i < toShowWhenReset.Length; i++)
+        {
+            toShowWhenReset[i].SetActive(true);
+        }
+
+        for (int i = 0; i < toHideWhenReset.Length; i++)
+        {
+            toHideWhenReset[i].SetActive(false);
+        }
+        currentQuestion = 1;
+
+        performances = new List<int>() ;
     }
     // Start is called before the first frame update
     void Start()

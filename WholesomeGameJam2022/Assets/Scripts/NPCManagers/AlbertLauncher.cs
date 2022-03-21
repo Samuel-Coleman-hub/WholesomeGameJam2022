@@ -11,11 +11,15 @@ public class AlbertLauncher : NPCManager
     bool campFire;
     [SerializeField] AllyManager allyManager;
     [SerializeField] GameObject player;
+    public bool firstDialog = true;
+
 
     public override GameObject pickDialog()
     {
-        if (!allyManager.allies.Contains("Researcher"))
+        Debug.Log("piiiiiiiiiiiick");
+        if (firstDialog)
         {
+            firstDialog = false;
             return albertDialogs[0];
         } else
         {
@@ -26,15 +30,28 @@ public class AlbertLauncher : NPCManager
             {
                 if (player.transform.Find("QuizzState").Find("QuizzWon").gameObject.activeSelf)
                 {
-                    Debug.Log("won");
+                    if (!win)
+                    {
+                        win = true;
+                        returnNothing = true;
+                        return albertDialogs[2];
+                    } else
+                    {
+                        Debug.Log("return nothing");
+                        returnNothing = true;
+                        return null;
+                    }
+                   
+
                 }
                 else
                 {
-                    Debug.Log("lost");
+                    return albertDialogs[1];
                 }
             }
+            return null;
         }
-        return albertDialogs[0]; 
+        
     }
 
     // Start is called before the first frame update

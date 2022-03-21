@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class NPCManager : MonoBehaviour
 {
-    GameObject dialog;
     public bool returnNothing = false;
 
     public virtual void playDialogue()
     {
         if (!returnNothing)
         {
-            dialog = pickDialog();
+            GameObject dialog = pickDialog();
             dialog.SetActive(true);
             dialog.transform.Find("DialogManager").gameObject.SetActive(true);
         }
