@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class QuestionManagerQuizz : MonoBehaviour
 {
+    [SerializeField] GameObject dialogManager;
+    public GameManager dialogResearcher;
+
     int currentQuestion = 1;
     int nbQuestions = 5;
 
@@ -49,8 +51,12 @@ public class QuestionManagerQuizz : MonoBehaviour
             if (performances.Contains(0))
             {
                 Debug.Log("fail");
-            } else
+                dialogManager.GetComponent<DialogManager>().advanceToFail();
+
+            }
+            else
             {
+                dialogManager.GetComponent<DialogManager>().advanceToWin();
                 Debug.Log("Success");
             }
         }

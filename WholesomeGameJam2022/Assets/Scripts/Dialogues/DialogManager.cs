@@ -11,6 +11,7 @@ public class DialogManager : MonoBehaviour
     [SerializeField] string nameNPC;
 
     public bool isPlaying = false;
+    public bool win = false;
 
     // Start is called before the first frame update
     void Start()
@@ -36,15 +37,59 @@ public class DialogManager : MonoBehaviour
 
     public void showNewDialog()
     {
+        currentDialog++;
         GameObject newDialog = Npc.transform.GetChild(currentDialog).gameObject;
         newDialog.SetActive(true);
         game.transform.parent.gameObject.SetActive(false);
         game.SetActive(false);
     }
 
+    public void advanceToFail()
+    {
+        Debug.Log("my name : " + Npc.name);
+        GameObject dialog;
+        if (currentDialog == 0)
+        {
+            dialog = Npc.transform.GetChild(currentDialog).gameObject;
+
+        }
+        else
+        {
+            dialog = Npc.transform.GetChild(currentDialog - 1).gameObject;
+        }
+        Debug.Log("aaaaaaa"+ dialog.name);
+        dialog.SetActive(true);
+        dialog.transform.Find("Texts").gameObject.SetActive(false);
+        Npc =dialog.transform.Find("Game").Find("Lose").gameObject;
+        Debug.Log(Npc.name);
+        Npc.gameObject.SetActive(true);
+        isPlaying = false;
+        currentDialog = 0;
+
+
+    }
+    public void advanceToWin()
+    {
+
+        GameObject dialog = Npc.transform.GetChild(currentDialog - 1).gameObject;
+
+        dialog.SetActive(true);
+ 
+        dialog.transform.Find("Texts").gameObject.SetActive(false);
+        Npc = Npc.transform.GetChild(currentDialog-1).gameObject.transform.Find("Game").Find("Win").gameObject;
+        Npc.gameObject.SetActive(true);
+        isPlaying = false;
+        currentDialog = 0;
+
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if(Npc != null)
+        {
+            //Debug.Log(Npc.name);
+        }
         //Debug.Log(currentDialog);
         if(currentDialog < Npc.transform.childCount)
         {
@@ -57,14 +102,39 @@ public class DialogManager : MonoBehaviour
                 
                 if (Input.GetMouseButtonDown(0) && !isPlaying)
                 {
-                    
+                    Debug.Log(currentDialog);
+
+
                     GameObject dialog = Npc.transform.GetChild(currentDialog).gameObject;
                     dialog.SetActive(false);
                     currentDialog++;
 
                     if (dialog.transform.Find("Ally"))
                     {
+                        GameValues.allies.Add(nameNPC);
                         GameObject.Find("Player").GetComponent<AllyManager>().allies.Add(nameNPC);
+                    }
+
+                    if (dialog.transform.Find("QuizzDeclined"))
+                    {
+                        GameObject.Find("Player").transform.Find("QuizzState").Find("QuizzRefused").gameObject.SetActive(true);
+                    }
+
+                    if (dialog.transform.Find("QuizzWon"))
+                    {
+                        GameObject.Find("Player").transform.Find("QuizzState").Find("QuizzWon").gameObject.SetActive(true);
+                        GameObject.Find("Player").transform.Find("QuizzState").Find("QuizzLost").gameObject.SetActive(false);
+                    }
+
+                    if (dialog.transform.Find("QuizzLost"))
+                    {
+                        GameObject.Find("Player").transform.Find("QuizzState").Find("QuizzWon").gameObject.SetActive(false);
+                        GameObject.Find("Player").transform.Find("QuizzState").Find("QuizzLost").gameObject.SetActive(true);
+                    }
+
+                    if (dialog.transform.Find("QuizzAccepted"))
+                    {
+                        GameObject.Find("Player").transform.Find("QuizzState").Find("QuizzRefused").gameObject.SetActive(false);
                     }
 
                     if (dialog.transform.Find("Game"))
