@@ -11,7 +11,10 @@ public class initMiniGames : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.transform.position =  new Vector3 (player.transform.position.x + offset,0,0);
+        
+        this.transform.position =  new Vector3 (player.transform.position.x + offset, 1.25f, 0);
+        Debug.Log(player.transform.position.x);
+        Debug.Log(transform.position);
     }
 
     // Update is called once per frame
