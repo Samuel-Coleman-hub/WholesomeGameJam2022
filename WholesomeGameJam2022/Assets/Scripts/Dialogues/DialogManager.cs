@@ -8,6 +8,8 @@ public class DialogManager : MonoBehaviour
     int currentDialog = 0;
     [SerializeField] GameObject game;
 
+    [SerializeField] string nameNPC;
+
     public bool isPlaying = false;
 
     // Start is called before the first frame update
@@ -21,6 +23,9 @@ public class DialogManager : MonoBehaviour
         GameObject button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
         GameObject dialog = Npc.transform.GetChild(currentDialog).gameObject;
         dialog.transform.Find("Texts").gameObject.SetActive(false);
+        Debug.Log(dialog.name);
+        Debug.Log(button.name);
+        Debug.Log(Npc.transform.GetChild(currentDialog).name);
         Npc = Npc.transform.GetChild(currentDialog).gameObject.transform.Find("Choice").Find(button.name).gameObject;
         Npc.SetActive(true);
         
@@ -40,7 +45,7 @@ public class DialogManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(currentDialog);
+        //Debug.Log(currentDialog);
         if(currentDialog < Npc.transform.childCount)
         {
             if (Npc.transform.GetChild(currentDialog).gameObject.transform.Find("Choice") != null)
@@ -52,28 +57,46 @@ public class DialogManager : MonoBehaviour
                 
                 if (Input.GetMouseButtonDown(0) && !isPlaying)
                 {
-
+                    
                     GameObject dialog = Npc.transform.GetChild(currentDialog).gameObject;
                     dialog.SetActive(false);
                     currentDialog++;
 
+                    if (dialog.transform.Find("Ally"))
+                    {
+                        GameObject.Find("Player").GetComponent<AllyManager>().allies.Add(nameNPC);
+                    }
+
                     if (dialog.transform.Find("Game"))
                     {
                         isPlaying = true;
-                        game.transform.parent.gameObject.SetActive(true);
+                        if(game.transform.parent != null)
+                        {
+                            game.transform.parent.gameObject.SetActive(true);
+                        }
                         game.SetActive(true);
                     }
                     else
                     {
                         if(currentDialog < Npc.transform.childCount)
                         {
+                            
                             GameObject newDialog = Npc.transform.GetChild(currentDialog).gameObject;
-                            newDialog.SetActive(true);
+                            if(newDialog.name != "Ally" && newDialog.name != "DialogManager")
+                            {
+                                Debug.Log(newDialog.name);
+                                newDialog.SetActive(true);
+                            } else
+                            {
+                                currentDialog++;
+                            }
+                           
                         } 
                     }
-                    if (currentDialog >= Npc.transform.childCount)
+                    if (currentDialog > Npc.transform.childCount)
                     {
                         gameObject.transform.parent.gameObject.SetActive(false);
+                        gameObject.SetActive(false);
                     }
 
                 }
@@ -81,6 +104,7 @@ public class DialogManager : MonoBehaviour
         }  else
         {
             gameObject.transform.parent.gameObject.SetActive(false);
+            gameObject.SetActive(false);
 
         }
 

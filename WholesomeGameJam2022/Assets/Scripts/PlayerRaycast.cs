@@ -29,7 +29,9 @@ public class PlayerRaycast : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.E))
             {
-                Debug.Log("Talk to NPC");  
+                Debug.Log("Talk to NPC");
+                Debug.Log(hit.collider.name);
+                hit.collider.gameObject.GetComponent<NPCManager>().playDialogue();
             }
         }
     }

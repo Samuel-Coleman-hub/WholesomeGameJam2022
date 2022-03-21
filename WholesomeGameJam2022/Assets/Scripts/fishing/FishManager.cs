@@ -6,6 +6,7 @@ public class FishManager : MonoBehaviour
 {
     [SerializeField] GameObject fish;
     [SerializeField] GameObject rod;
+    [SerializeField] GameObject player;
     public float maxDistance;
 
 
@@ -19,8 +20,17 @@ public class FishManager : MonoBehaviour
         if (Mathf.Abs(fish.transform.position.x - rod.transform.position.x) < maxDistance)
         {
             Debug.Log("done");
-            fish.GetComponent<FishBehaviour>().getCaught();
+            StartCoroutine(endFishing());
         }
+    }
+
+    IEnumerator endFishing()
+    {
+        fish.GetComponent<FishBehaviour>().getCaught();
+        yield return new WaitForSeconds(0.5f);
+        gameObject.transform.parent.parent.gameObject.SetActive(false);
+        player.transform.Find("Fish").gameObject.SetActive(true);
+
     }
     // Start is called before the first frame update
     void Start()
