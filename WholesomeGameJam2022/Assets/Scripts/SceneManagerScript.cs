@@ -11,24 +11,24 @@ public class SceneManagerScript : MonoBehaviour
     {
         if(SceneManager.GetActiveScene().name != "BaseCamp")
         {
-            SceneManager.LoadScene("BaseCampBackUp");
+            if (SceneManager.GetActiveScene().name != "BaseCamp")
+            {
+                SceneManager.LoadScene("BaseCampBackUp");
+            }
         }
     }
 
     public void GotToIslandOne()
     {
-        if (SceneManager.GetActiveScene().name != "Island 1")
-        {
-            SceneManager.LoadScene("Island 1");
-        }
+        /*
+        GameObject.Find("BaseCamp").SetActive(false);
+        GameObject.Find("Desert").SetActive(true);*/
     }
 
     public void GoToIslandTwo()
     {
-        if (SceneManager.GetActiveScene().name != "Island 2")
-        {
-            SceneManager.LoadScene("Island 2");
-        }
+        GameObject.Find("BaseCamp").SetActive(false);
+        GameObject.Find("Desert").SetActive(true);
     }
 
     public void GoToStartMenu()

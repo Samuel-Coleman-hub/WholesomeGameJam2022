@@ -7,11 +7,15 @@ public class DialogManager : MonoBehaviour
     [SerializeField] GameObject Npc;
     public int currentDialog = 0;
     [SerializeField] GameObject game;
+    [SerializeField] GameObject campFire;
 
     [SerializeField] string nameNPC;
 
+
     [SerializeField] GameObject[] toRestore;
     [SerializeField] GameObject[] toHideWhenRestore;
+
+    public bool campFireActivate = false;
 
 
 
@@ -23,7 +27,11 @@ public class DialogManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(campFire != null)
+        {
+            campFire.SetActive(true);
+
+        }
     }
 
     public void onClick()
@@ -133,6 +141,8 @@ public class DialogManager : MonoBehaviour
                     {
                         Debug.Log("NEEEWWW ALLY");
                         GameObject.Find("Player").GetComponent<AllyManager>().allies.Add(nameNPC);
+                        GameObject.Find("AllyDisplayer").GetComponent<AIDisplayer>().display(nameNPC);
+                        
                     }
 
                     if (dialog.transform.Find("QuizzDeclined"))
@@ -199,6 +209,10 @@ public class DialogManager : MonoBehaviour
             gameObject.transform.parent.gameObject.SetActive(false);
             gameObject.SetActive(false);
             Npc = gameObject.transform.parent.gameObject;
+            if(campFire != null)
+            {
+                campFire.SetActive(false);
+            }
             if (loop)
             {
                 restore();

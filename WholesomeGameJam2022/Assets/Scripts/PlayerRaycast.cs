@@ -6,6 +6,7 @@ public class PlayerRaycast : MonoBehaviour
 {
     [SerializeField] GameObject raycastPointRight;
     [SerializeField] GameObject raycastPointLeft;
+    GameObject box;
     void FixedUpdate()
     {
         string directionMoving = GetComponent<Move2D>().directionMoving;
@@ -27,11 +28,21 @@ public class PlayerRaycast : MonoBehaviour
 
         if (hit.collider != null && hit.collider.tag == "NPC")
         {
+            box = hit.collider.gameObject.transform.Find("Box").gameObject;
+            hit.collider.gameObject.transform.Find("Box").gameObject.SetActive(true);
+
             if(Input.GetKeyDown(KeyCode.E))
             {
                 Debug.Log("Talk to NPC");
                 Debug.Log(hit.collider.name);
                 hit.collider.gameObject.GetComponent<NPCManager>().playDialogue();
+            }
+        } else
+        {
+            if(box != null)
+            {
+                box.SetActive(false);
+                box = null;
             }
         }
     }

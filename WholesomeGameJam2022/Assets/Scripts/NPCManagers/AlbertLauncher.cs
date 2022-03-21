@@ -33,13 +33,12 @@ public class AlbertLauncher : NPCManager
                     if (!win)
                     {
                         win = true;
-                        returnNothing = true;
                         return albertDialogs[2];
                     } else
                     {
                         Debug.Log("return nothing");
                         returnNothing = true;
-                        return null;
+                        return albertDialogs[3];
                     }
                    
 

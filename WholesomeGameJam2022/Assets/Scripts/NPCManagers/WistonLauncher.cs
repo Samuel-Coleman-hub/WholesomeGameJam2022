@@ -12,6 +12,7 @@ public class WistonLauncher : NPCManager
     bool firstDialog = false;
     bool secondDialog = false;
     public bool hasFish = false;
+    public bool campfire = false;
 
     public override GameObject pickDialog()
     {
@@ -31,10 +32,14 @@ public class WistonLauncher : NPCManager
                 firstDialog = true;
                 return WistonDialogs[1];
             }
-            else
+            else if (campfire != true)
+            {
+                campfire = true;
+                return WistonDialogs[3];
+            } else
             {
                 returnNothing = true;
-                return WistonDialogs[3];
+                return WistonDialogs[4];
             }
         } 
         
